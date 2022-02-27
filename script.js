@@ -83,12 +83,14 @@ const newQuoteBtn = document.getElementById('new-quote');
 const newLocalQuoteBtn = document.getElementById('new-local-quote');
 const loader = document.getElementById('loader');
 
-function showLoadingSpinner() {
+//show loading
+function loading() {
     loader.hidden = false;
     quoteContainer.hidden = true;
 }
 
-function removeLoadingSpinner() {
+//Hide Loading
+function complete() {
     if(!loader.hidden){
         quoteContainer.hidden = false;
         loader.hidden = true;
@@ -97,7 +99,7 @@ function removeLoadingSpinner() {
 
 //Get Quote from API
 async function getQuote() {
-    showLoadingSpinner();
+    loading();
     const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
     const apiUrl = 'http://api.forismatic.com/api/1.0/?method=getQuote&lang=en&format=json';
     try {
@@ -117,7 +119,7 @@ async function getQuote() {
         console.log(data)
         quoteText.innerText = data.quoteText;
         //hide loader, show quote
-        removeLoadingSpinner();
+        complete();
     } catch (error) {
         // quoteText.innerText = "Sorry, an error occur.";
     }
